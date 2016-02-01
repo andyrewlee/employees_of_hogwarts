@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Potter Movies</title>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $.ajax({
+          url: 'https://harrypotterapi.herokuapp.com/movies',
+          method: 'get'
+        })
+        .success(function(res) {
+          var htmlStr = '';
+          for(var i = 0; i < res.length; i++) {
+            htmlStr = htmlStr +
+            '<h1>' + res[i].name + '<\/h1>' +
+            '<ul>' +
+              '<li>Budget: ' + res[i].budget + '<\/li>' +
+              '<li>Gross Revenue: ' + res[i].gross_revenue + '<\/li>' +
+            '<\/ul>' +
+            '<img src=' + res[i].image_url + '>';
+          }
+          $('#movies').html(htmlStr);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>All Movies</h1>
+    <div id="movies">
+    </div>
+  </body>
+</html>
